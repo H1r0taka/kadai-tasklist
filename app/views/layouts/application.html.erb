@@ -1,3 +1,5 @@
+<!-- View(ERB)は、HTMLで記述していく -->
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,6 +16,7 @@
       <%= render 'layouts/flash_tasklists' %>
       
       <%= yield %>
+      <!-- yield があるから、index.html.erb, show.html.erb 等各ページを代入する事ができる
     </div>
   </body>
 </html>

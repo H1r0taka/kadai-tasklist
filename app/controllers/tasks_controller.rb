@@ -61,6 +61,10 @@ class TasksController < ApplicationController
     
     private
     
+    def message_params
+      params.require(:task).permit(:content, :status)
+    end
+
     def set_task
         @task = Task.find(params[:id])
     end

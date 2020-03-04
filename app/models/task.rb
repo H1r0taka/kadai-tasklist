@@ -5,6 +5,6 @@
     # ActiveRecord::Base に、require,extend,includeが指定してあり、task.rbもそれらのモデル操作が可能になる
 
 class Task < ApplicationRecord
-    validates :content, presence: true, length: { maximum: 255 }
-    calidates :status, presence: true, length: { maximun: 255 }
+#    validates :content, presence: true, length: { maximum: 255 }
+#    calidates :status, presence: true, length: { maximun: 255 }
 end

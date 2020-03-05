@@ -4,15 +4,16 @@
     # View: Controller が、レスポンスとして返すWebページ; Controllerによって適切なModelがセットされる
 
 class TasksController < ApplicationController
-    #before_action :set_task, only: [:show, :edit, :update, :destroy]
-    # before_action で実行するアクションを指定し、各アクションが実行される前に指定する事ができる
+    before_action :set_task, only: [:show, :edit, :update, :destroy]
+    # before_action で実行するアクションを指定し、各アクションが実行される前に指定する事ができる(:set_taskを省略)
     
     def index
       @tasks = Task.all # .all => 全てのレコードを取得する
     end
     
     def show
-      @task = Task.find(params[:id])# idを指定して検索
+      # set_task
+      # @task = Task.find(params[:id])# idを指定して検索
     end
     
     def new
@@ -31,11 +32,13 @@ class TasksController < ApplicationController
     end
 
     def edit
-      @task = Task.find(params[:id])
+      # set_task
+      # @task = Task.find(params[:id])
     end
 
       def update
-        @task = Task.find(params[:id])
+        # set_task
+        # @task = Task.find(params[:id])
           if @task.update(task_params)
             flash[:success] = 'Task は正常に更新されました'
             redirect_to @task
@@ -46,21 +49,22 @@ class TasksController < ApplicationController
       end
 
     def destroy
-        @tasks = Task.find(params[:id])
-        @tasks.destroy
-        flash[:success] = 'Task は正常に削除されました'
-        redirect_to tasks_url
+      # set_task
+      # @tasks = Task.find(params[:id])
+      @tasks.destroy
+      flash[:success] = 'Task は正常に削除されました'
+      redirect_to tasks_url
     end
     
     private
     
-#    def message_params
+#    def task_params
 #      params.require(:task).permit(:content, :status)
 #    end
 
-#    def set_task
-#        @task = Task.find(params[:id])
-#    end
+    def set_task
+        @task = Task.find(params[:id])
+    end
 
   # Strong Parameter
     def task_params

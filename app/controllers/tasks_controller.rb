@@ -1,24 +1,5 @@
-    # Rubyメソッドを使用してSQLを操作する
-    # Controller : HTTPリクエストの処理を担当; リクエストに対応した、Modelの取得・作成、保存
-    # HTTPリクエスト　Router => Controller: アクション
-    # View: Controller が、レスポンスとして返すWebページ; Controllerによって適切なModelがセットされる
-
 class TasksController < ApplicationController
-    before_action :set_task, only: [:show, :edit, :update, :destroy]
-    # before_action で実行するアクションを指定し、各アクションが実行される前に指定する事ができる(:set_taskを省略)
-    
-    def index
-      @tasks = Task.all # .all => 全てのレコードを取得する
-    end
-    
-    def show
-      # set_task
-      # @task = Task.find(params[:id])# idを指定して検索
-    end
-    
-    def new
-      @task = Task.new # .new => 新規レコードのためのモデルインスタンスを作成する
-    end
+    before_action :require_user_logged_in
 
     def create
       @task = Task.new(task_params)
@@ -31,26 +12,7 @@ class TasksController < ApplicationController
       end
     end
 
-    def edit
-      # set_task
-      # @task = Task.find(params[:id])
-    end
-
-      def update
-        # set_task
-        # @task = Task.find(params[:id])
-          if @task.update(task_params)
-            flash[:success] = 'Task は正常に更新されました'
-            redirect_to @task
-          else
-            flash.now[:danger] = 'Task は更新されませんでした'
-            render :edit
-          end
-      end
-
     def destroy
-      # set_task
-      # @tasks = Task.find(params[:id])
       @task.destroy
       flash[:success] = 'Task は正常に削除されました'
       redirect_to tasks_url
@@ -62,8 +24,14 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
     end
 
-  # Strong Parameter
     def task_params
       params.require(:task).permit(:content, :status)
     end
+    
+  def correct_user
+    @task = current_user.tasks.find_by(id: params[:id])
+    unless @task
+      redirect_to root_url
+    end
+  end
 end

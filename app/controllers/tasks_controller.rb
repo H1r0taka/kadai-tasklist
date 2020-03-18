@@ -1,6 +1,25 @@
 class TasksController < ApplicationController
     before_action :require_user_logged_in
-
+    
+    def show
+      @task = Task.find(params[:id])
+    end
+    
+    def edit
+      @task = Task.find(params[:id])
+    end
+    
+    def update
+      @task = Task.find(params[:id])
+      if @task.update(task_params)
+        flash[:success] = '正常に更新されました'
+        redirect_to @task
+      else
+        flash.now[:danger] = '更新されませんでした'
+        render :edit
+      end
+    end
+    
     def create
       @task = current_user.tasks.build(task_params)
 #      p 'ここを見ろ！'

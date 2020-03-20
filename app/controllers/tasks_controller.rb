@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-    before_action :require_user_logged_in
+    before_action :require_user_logged_in, only: [:show, :edit, :update, :create, :destroy]
     
     def show
       @task = Task.find(params[:id])

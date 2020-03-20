@@ -7,4 +7,11 @@
   <%= link_to '一覧に戻る', root_path %>
   <%= link_to 'このタスクを編集する', edit_task_path(@task) %>
   <%= link_to 'このタスクを削除する', @tasks, method: :delete, data: { confirm: '本当に削除してよろしいですか？' } %>
+<% else %>
+  <div class="center jumbotron">
+    <div class="text-center">
+      <h1>Your Task</h1>
+      <%= link_to 'Sign up!', signup_path, class: 'btn btn-lg btn-primary' %>
+    </div>
+  </div>
 <% end %>

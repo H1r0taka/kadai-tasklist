@@ -46,6 +46,12 @@ class TasksController < ApplicationController
     
     private
     
+    def require_user_logged_in
+      unless logged_in?
+        redirect_to login_url
+      end
+    end
+    
     def set_task
       @task = Task.find(params[:id])
     end

@@ -3,12 +3,8 @@ class TasksController < ApplicationController
     before_action :correct_user, only: [:show, :edit, :update, :destroy]
    
     def index
-      if logged_in?
-        @task = current_user.tasks.build
-        @tasks = current_user.tasks.order(id: :desc)
-      else
-        redirect_to signup_path
-      end
+      @task = current_user.tasks.build
+      @tasks = current_user.tasks.order(id: :desc)
     end
     
     def show

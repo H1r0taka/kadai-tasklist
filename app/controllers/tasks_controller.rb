@@ -35,7 +35,7 @@ class TasksController < ApplicationController
     end
     
     def create
-#      @task = current_user.tasks.build(task_params)
+      @task = current_user.tasks.build(task_params)
 #      p 'ここを見ろ！'
 #      p @task
       if @task.save# => レコードの作成

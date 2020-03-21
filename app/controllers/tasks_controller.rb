@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
     before_action :require_user_logged_in
-    before_action :correct_user, only: [:show, :edit, :update, :destroy]
+    before_action :correct_user, only: [:show, :edit, :update, :create, :destroy]
    
     def index
       if logged_in?
@@ -35,7 +35,7 @@ class TasksController < ApplicationController
     end
     
     def create
-      @task = current_user.tasks.build(task_params)
+#      @task = current_user.tasks.build(task_params)
 #      p 'ここを見ろ！'
 #      p @task
       if @task.save# => レコードの作成
